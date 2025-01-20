@@ -42,7 +42,7 @@ N = 5  # Number of autonomous cars
 b = 1.25  # Proportional gain
 c = 1  # Derivative gain
 T = 1.0  # Desired time interval
-ring_length = 800  # Length of the ring
+ring_length = 1000  # Length of the ring
 
 # Define matrices A and B
 A = np.array([[0, 1],
@@ -56,7 +56,7 @@ for i in range(N):
     M[2 * i:2 * i + 2, 2 * i:2 * i + 2] = A
     M[2 * i:2 * i + 2, 2 * ((i + 1) % N):2 * ((i + 1) % N) + 2] = B  # Connect to the next car (modulo for ring)
 
-initial_dist = 1
+initial_dist = 10
 
 # Initial conditions
 z0 = np.zeros(2 * N)  # Initial positions and velocities
@@ -138,7 +138,7 @@ def animate_cars():
         cars.set_data(x, y)
         return cars,
 
-    ani = animation.FuncAnimation(fig, update, frames=len(t), init_func=init, blit=True, interval=dt * 50)
+    ani = animation.FuncAnimation(fig, update, frames=len(t), init_func=init, blit=True, interval=dt * 1000)
 
     # Save the animation as a GIF
     #from matplotlib.animation import PillowWriter

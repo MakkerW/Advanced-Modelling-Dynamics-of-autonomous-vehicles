@@ -1,0 +1,40 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+b = 1.0   # Example value for b
+c = 2.0   # Example value for c
+cT = 0.5  # Example value for cT
+
+# Define alpha range
+alpha = np.linspace(0, 2 * np.pi, 500)  # Alpha from 0 to 2*pi
+eialpha = np.exp(1j * alpha)  # e^(i*alpha)
+
+# Coefficients of the quadratic equation
+p_alpha = b * (1 - eialpha) + cT * eialpha
+q_alpha = c * (1 - eialpha)
+
+# Quadratic formula
+discriminant = np.sqrt(p_alpha**2 - 4 * q_alpha)
+lambda_1 = (-p_alpha + discriminant) / 2
+lambda_2 = (-p_alpha - discriminant) / 2
+
+# Plot the real and imaginary parts of the solutions
+plt.figure(figsize=(10, 6))
+
+# Plot λ₁ and λ₂ on the same graph
+plt.plot(alpha, lambda_1.real, label="Re(λ₁)", color="blue", linestyle="-")
+plt.plot(alpha, lambda_1.imag, label="Im(λ₁)", color="orange", linestyle="--")
+plt.plot(alpha, lambda_2.real, label="Re(λ₂)", color="green", linestyle="-")
+plt.plot(alpha, lambda_2.imag, label="Im(λ₂)", color="red", linestyle="--")
+
+# Add title, labels, and legend
+plt.title("Solutions λ₁ and λ₂ vs α")
+plt.xlabel("α (radians)")
+plt.ylabel("λ")
+plt.legend()
+
+# Display the plot
+plt.grid(True)
+plt.tight_layout()
+plt.show()
